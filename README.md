@@ -15,9 +15,7 @@
 2. Open Simulator
 
 #### Screenshot
-<img src="https://i.imgur.com/MPo6Hmx.png" width="240" />
+<img src="https://i.imgur.com/vqHXppT.png" width="240" />
 
 #### Todo
-- [ ] Make button select nearest stop
-- [ ] Take a screenshot when trains are running
-- [ ] Add another button to open navigation app of choice
+- [ ] Add a button to open navigation app of choice
