@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, props) => ({
   schedule: state.schedules.get(props.id),
   selected: state.routes.selected === props.id,
+  active: state.active,
 });
 
 const mapDispatchToProps = {
@@ -102,10 +103,21 @@ const Spinner = () => {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class StopSchedule extends Component {
   componentDidUpdate(previous) {
-    if (!previous.selected && this.props.selected) {
+    // conditions for starting interval
+    const restore =
+      !previous.active && this.props.active && this.props.selected;
+    const begin = !previous.selected && this.props.selected;
+    const get = restore || begin;
+    // conditions for clearing interval
+    const sleep = previous.active && !this.props.active;
+    const stop = previous.selected && !this.props.selected;
+    const clear = sleep || stop;
+    // start or stop interval
+    if (get) {
+      clearInterval(this._interval);
       this._getSchedule();
       this._interval = setInterval(this._getSchedule, 1000);
-    } else if (previous.selected && !this.props.selected) {
+    } else if (clear) {
       clearInterval(this._interval);
     }
   }

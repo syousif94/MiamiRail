@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -40,6 +40,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>SyncUp never uses bluetooth</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>SyncUp never accesses the calendar</string>
+	<key>NSCameraUsageDescription</key>
+	<string>SyncUp needs camera access to scan QR codes and take selfies</string>
+	<key>NSContactsUsageDescription</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to locate the nearest stop.</string>
 	<key>UILaunchStoryboardName</key>
