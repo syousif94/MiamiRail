@@ -96,7 +96,7 @@ export default class RouteMap extends Component {
           {this._renderGreenLine()}
           {this._renderStops()}
         </MapView>
-        <NearestStop select={this._selectStop} />
+        <NearestStop select={this._selectStop} hide={this._hideSelected} />
       </View>
     );
   }

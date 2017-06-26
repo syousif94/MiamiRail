@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { getNearestStop } from '~/lib/location';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   wrap: {
@@ -29,9 +31,23 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapStateToProps = state => ({
+  selected: state.routes.selected,
+});
+
+@connect(mapStateToProps)
 export default class NearestStop extends Component {
-  _selectNearest = () => {
-    this.props.select('DLS');
+  _selectNearest = async () => {
+    try {
+      const nearest = await getNearestStop();
+      if (this.props.selected === nearest.id) {
+        this.props.hide();
+      } else {
+        this.props.select(nearest.id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   render() {
     return (
