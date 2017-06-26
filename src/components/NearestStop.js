@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   wrap: {
@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.8,
     shadowRadius: 3,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 1,
   },
 });
 
@@ -30,7 +33,9 @@ export default class NearestStop extends Component {
   render() {
     return (
       <View style={styles.wrap} pointerEvents="box-none">
-        <TouchableOpacity style={styles.btn} />
+        <TouchableOpacity style={styles.btn}>
+          <Image source={require('~/assets/nearest.png')} />
+        </TouchableOpacity>
       </View>
     );
   }
