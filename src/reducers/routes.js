@@ -34,18 +34,20 @@ export function selectStop(payload) {
 
 export function load() {
   return dispatch => {
-    return loadRoutes().then(routes => {
-      if (routes) {
-        dispatch(setRoutes(routes));
-      } else {
-        dispatch(setLoading());
-        return fetchRoutes().then(routes => {
-          if (routes) {
-            dispatch(setRoutes(routes));
-          }
-        });
-      }
-    });
+    return loadRoutes()
+      .then(routes => {
+        if (routes) {
+          dispatch(setRoutes(routes));
+        } else {
+          dispatch(setLoading());
+          return fetchRoutes().then(routes => {
+            if (routes) {
+              dispatch(setRoutes(routes));
+            }
+          });
+        }
+      })
+      .catch(error => {});
   };
 }
 

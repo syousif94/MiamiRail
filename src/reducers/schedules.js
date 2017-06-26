@@ -17,14 +17,16 @@ export function setSchedule(payload) {
 
 export function getSchedule(id) {
   return dispatch => {
-    return fetchSchedule(id).then(data => {
-      dispatch(
-        setSchedule({
-          id,
-          data,
-        })
-      );
-    });
+    return fetchSchedule(id)
+      .then(data => {
+        dispatch(
+          setSchedule({
+            id,
+            data,
+          })
+        );
+      })
+      .catch(error => {});
   };
 }
 
