@@ -6,7 +6,7 @@ import * as Animatable from 'react-native-animatable';
 
 const styles = StyleSheet.create({
   loading: {
-    height: 90,
+    height: 105,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingTop: 10,
-    height: 90,
+    height: 105,
   },
   columns: {
     flexDirection: 'row',
@@ -30,14 +30,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   left: {
-    marginRight: 2,
+    marginRight: 8,
   },
   right: {
-    marginLeft: 2,
+    marginLeft: 8,
   },
   direction: {
     color: '#000',
     fontSize: 12,
+    marginBottom: 4,
   },
   prediction: {
     flexDirection: 'row',
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     height: 6,
     width: 6,
     borderRadius: 3,
-    marginRight: 3,
+    marginRight: 5,
   },
   GRN: {
     backgroundColor: 'green',
@@ -65,11 +66,11 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 12,
-    color: '#000',
+    color: '#979797',
   },
   arrival: {
     fontSize: 12,
-    color: '#979797',
+    color: '#000',
   },
   updatedAt: {
     fontSize: 12,
@@ -126,21 +127,6 @@ export default class StopSchedule extends Component {
       <View style={styles.container}>
         <View style={styles.columns}>
           <View style={[styles.column, styles.left]}>
-            <Text style={styles.direction}>Northbound</Text>
-            {this.props.schedule.nb.map((prediction, i) => {
-              const key = `nb${i}`;
-              return (
-                <View style={styles.prediction} key={key}>
-                  <View style={styles.leftData}>
-                    <View style={[styles.route, styles[prediction.color]]} />
-                    <Text style={styles.time}>{prediction.time}</Text>
-                  </View>
-                  <Text style={styles.arrival}>{prediction.arrival}</Text>
-                </View>
-              );
-            })}
-          </View>
-          <View style={[styles.column, styles.right]}>
             <Text style={styles.direction}>Southbound</Text>
             {this.props.schedule.sb.map((prediction, i) => {
               const key = `sb${i}`;
@@ -148,9 +134,24 @@ export default class StopSchedule extends Component {
                 <View style={styles.prediction} key={key}>
                   <View style={styles.leftData}>
                     <View style={[styles.route, styles[prediction.color]]} />
-                    <Text style={styles.time}>{prediction.time}</Text>
+                    <Text style={styles.arrival}>{prediction.arrival}</Text>
                   </View>
-                  <Text style={styles.arrival}>{prediction.arrival}</Text>
+                  <Text style={styles.time}>{prediction.time}</Text>
+                </View>
+              );
+            })}
+          </View>
+          <View style={[styles.column, styles.right]}>
+            <Text style={styles.direction}>Northbound</Text>
+            {this.props.schedule.nb.map((prediction, i) => {
+              const key = `nb${i}`;
+              return (
+                <View style={styles.prediction} key={key}>
+                  <View style={styles.leftData}>
+                    <View style={[styles.route, styles[prediction.color]]} />
+                    <Text style={styles.arrival}>{prediction.arrival}</Text>
+                  </View>
+                  <Text style={styles.time}>{prediction.time}</Text>
                 </View>
               );
             })}

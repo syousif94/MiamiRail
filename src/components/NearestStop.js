@@ -30,10 +30,13 @@ const styles = StyleSheet.create({
 });
 
 export default class NearestStop extends Component {
+  _selectNearest = () => {
+    this.props.select('DLS');
+  };
   render() {
     return (
       <View style={styles.wrap} pointerEvents="box-none">
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={this._selectNearest}>
           <Image source={require('~/assets/nearest.png')} />
         </TouchableOpacity>
       </View>

@@ -41,14 +41,19 @@ export default class StopMarker extends Component {
   _deselect = () => {
     this.props.selectStop(null);
   };
+  _setRef = ref => {
+    this.props.setRef(this.props.stop.id, ref);
+  };
   render() {
     const stop = this.props.stop;
     return (
       <MapView.Marker
         coordinate={stop.coords}
         key={stop.id}
+        onPress={this.props.clear}
         onSelect={this._select}
         onDeselect={this._deselect}
+        ref={this._setRef}
       >
         <View style={styles.marker}>
           <View style={styles.bg} />

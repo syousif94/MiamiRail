@@ -30,6 +30,8 @@ export default class RouteMap extends Component {
     longitudeDelta: 0.1502144816953859,
   };
   componentDidMount() {
+    this._stops = {};
+    this._selected = null;
     this.props.load();
   }
   _renderOrangeLine = () => {
@@ -54,11 +56,33 @@ export default class RouteMap extends Component {
       />
     );
   };
+  _setStopRef = (id, ref) => {
+    this._stops[id] = ref;
+  };
+  _clearSelected = () => {
+    this._selected = null;
+  };
   _renderStops = () => {
     if (!this.props.stops) return null;
     return this.props.stops.map(stop =>
-      <StopMarker stop={stop} key={stop.id} />
+      <StopMarker
+        stop={stop}
+        key={stop.id}
+        setRef={this._setStopRef}
+        clear={this._clearSelected}
+      />
     );
+  };
+  _selectStop = id => {
+    if (id === this._selected || !this._stops[id]) return;
+    if (this._selected) this._stops[this._selected].hideCallout();
+    this._selected = id;
+    this._stops[id].showCallout();
+  };
+  _hideSelected = () => {
+    if (!this._selected || !this._stops[this._selected]) return;
+    this._stops[this._selected].hideCallout();
+    this._selected = null;
   };
   render() {
     return (
@@ -66,12 +90,13 @@ export default class RouteMap extends Component {
         <MapView
           style={styles.container}
           initialRegion={RouteMap.initialRegion}
+          onPress={this._hideSelected}
         >
           {this._renderOrangeLine()}
           {this._renderGreenLine()}
           {this._renderStops()}
         </MapView>
-        <NearestStop />
+        <NearestStop select={this._selectStop} />
       </View>
     );
   }
